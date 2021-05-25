@@ -14,4 +14,9 @@ import { FieldType } from '@ngx-formly/core';
     </div>
   `,
 })
-export class ObjectTypeComponent extends FieldType { }
+export class ObjectTypeComponent extends FieldType {
+  ngOnInit() {
+    console.log(this.to)
+    console.log(this.field)
+  }
+}

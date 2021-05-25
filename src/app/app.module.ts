@@ -2,15 +2,17 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CvFormComponent } from './cv-form/cv-form.component';
 import { ArrayTypeComponent } from './type/array-type.component';
+import { InputTypeComponent } from './type/input-type.component';
 import { ObjectTypeComponent } from './type/object-type.component';
 import { RepeatTypeComponent } from './type/repeat-type.component';
-
+import { PanelWrapperComponent } from './wrapper/panel-wrapper.component';
 
 export function minItemsValidationMessage(err, field: FormlyFieldConfig) {
   return `should NOT have fewer than ${field.templateOptions.minItems} items`;
@@ -58,7 +60,9 @@ export function constValidationMessage(err, field: FormlyFieldConfig) {
     CvFormComponent,
     RepeatTypeComponent,
     ObjectTypeComponent,
-    ArrayTypeComponent
+    ArrayTypeComponent,
+    InputTypeComponent,
+    PanelWrapperComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +85,11 @@ export function constValidationMessage(err, field: FormlyFieldConfig) {
         { name: 'uniqueItems', message: 'should NOT have duplicate items' },
         { name: 'const', message: constValidationMessage },
       ],
+      wrappers: [
+        { name: 'panel', component: PanelWrapperComponent },
+      ],
       types: [
+        // { name: 'input', component: InputTypeComponent },
         { name: 'string', extends: 'input' },
         {
           name: 'number',
@@ -103,13 +111,13 @@ export function constValidationMessage(err, field: FormlyFieldConfig) {
         },
         { name: 'boolean', extends: 'checkbox' },
         { name: 'enum', extends: 'select' },
-        { name: 'repeat', component: RepeatTypeComponent },
         { name: 'array', component: ArrayTypeComponent },
         { name: 'object', component: ObjectTypeComponent },
       ],
     }),
     FormlyMaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
